@@ -1,108 +1,22 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<title>St. Valentines Day</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="style.css" rel="stylesheet" type="text/css" />
-<script src="js/jquery-1.3.2.min.js" type="text/javascript"></script>
-<script src="js/cufon-yui.js" type="text/javascript"></script>
-<script src="js/cufon-replace.js" type="text/javascript"></script>
-<script src="js/Myriad_Pro_400.font.js" type="text/javascript"></script>
-<script src="js/Myriad_Pro_700.font.js" type="text/javascript"></script>
-</head>
-<body id="page1">
-<div class="tail-top">
-  <div class="tail-bottom">
-    <!-- HEADER -->
-    <div id="header">
-      <div class="nav-list">
-        <ul>
-          <li><a href="#"><img src="images/pic1.gif" alt="" /></a></li>
-          <li class="last"><a href="love.html"><img src="images/pic2.gif" alt="" /></a></li>
-        </ul>
-      </div>
-      <div class="logo"><a href="#"><img src="images/logo.gif" alt="" /></a></div>
-    </div>
-    <!-- CONTENT -->
-    <div id="content">
-      <div class="inner_copy">More <a href="#">Website Templates</a> @ Templates.com!</div>
-      <div class="indent">
-        <div class="wrapper">
-          <div class="col-1">
-            <div class="box">
-              <div class="top">
-                <div class="bot">
-                </div>
-              </div>
-            </div>
-            <div class="box1">
-              <div class="top">
-                <div class="bot">
-                  <div class="inner">
-                    <div class="img-box"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="indent1">
-              <h2>I love you, little <b>Sweetheart mine</b>, <span>And want you for</span> <strong>my Valentine!</strong></h2>
-              <h2><b>Suraj shrestha</b>    <3<span>loves</span><strong>you</strong></h2>
-            </div>
-            <div class="box3">
-              <div class="top">
-                <div class="bot">
-                  <div class="inner">
-                    <h2><b>baby</b><b>baby</b><b>baby</b><b>baby</b><b>baby</b><b>baby</b><b>baby</b></h2>
-                    <ul class="list2">
-                      <li><img src="images/icon1.gif" alt="" /><b><a href="#"></li>
-                      <li><img src="images/icon2.gif" alt="" /><b><a href="#"></li>
-                      <li><img src="images/icon3.gif" alt="" /><b><a href="#"></li> 
-                      <li><img src="images/icon1.gif" alt="" /><b><a href="#"></li>
-                      <li><img src="images/icon2.gif" alt="" /><b><a href="#"></li>
-                      <li><img src="images/icon3.gif" alt="" /><b><a href="#"></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="form-box">
-              <div class="top">
-                <div class="bot">
-                  <div class="inner">
-                    <h3>Search My heart <3</h3>
-                    <form action="#" method="post" id="form">
-                      <div class="form">
-                        <input type="text" />
-                        <a href="#"><img src="images/button-search.gif" alt="" /></a></div>
-                      <p>Use 'fuck' to find the love you are looking for.</p>
-                      <div><a href="#">Advanced Search</a></div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="box2">
-              <div class="top">
-                <div class="bot">
-                  <div class="inner"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- FOOTER -->
-    <div id="footer">
-      <p>Copyright - Suraj Shrestha &nbsp; &nbsp; &nbsp; &nbsp;</p>
-    </div>
-  </div>
-</div>
-<script type="text/javascript"> Cufon.now(); </script>
-</body>
-</html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="//j.maxmind.com/js/apis/geoip2/v2.0/geoip2.js"></script>
 
+<script>
+geoip2.cityISPOrg(function (response) {
+    $("#country").html(response.country.names.en);
+    $("#region").html(response.most_specific_subdivision.names.en);
+    $("#city").html(response.city.names.en);
+    $("#isp").html(response.traits.isp);
+    $("#proxy").html(response.traits.is_anonymous_proxy);
+    $("#ip").html(response.traits.ip_address);
+}, null, { w3cGeolocationDisabled: true });
+</script>
+
+<p>
+    <span id="country"></span>,
+    <span id="region"></span>,
+    <span id="city"></span>,
+    <span id="isp"></span>,
+    <span id="ip"></span>,
+    is proxy? <span id="proxy"></span>
+</p>
