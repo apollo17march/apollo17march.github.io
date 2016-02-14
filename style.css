@@ -93,7 +93,9 @@ h3 {font-size:20px;line-height:1.2em;color:#133439;text-transform:uppercase;marg
 .box3 {background:#f3f3f3;width:504px}
 .box3 .top {background:url(images/box3-top.gif) no-repeat left top}
 .box3 .bot {background:url(images/box3-bot.gif) no-repeat left bottom}
-.box3 .inner {padding:25px 25px 20px 30px}
+.box3 .inner {
+	background-image: url("images/babe.jpeg");
+	padding:25px 25px 20px 30px}
 .box3 h3 {margin-bottom:9px}
 .form-box {width:208px;background:url(images/form-box-tail.gif) repeat-y left top;margin-bottom:20px}
 .form-box .top {background:url(images/form-box-top.gif) no-repeat left top}
@@ -108,7 +110,7 @@ h3 {font-size:20px;line-height:1.2em;color:#133439;text-transform:uppercase;marg
 #header .logo {position:absolute;left:41px;top:63px}
 /* CONTENT */
 #content{
-	background-image: url("images/babe.jpeg");
+	/*background-image: url("images/babe.jpeg");*/
 }
 #content .col-1, #content .col-2 {margin-right:20px}
 #content .col-1 {width:208px}
