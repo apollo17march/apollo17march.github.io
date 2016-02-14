@@ -1,0 +1,22 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="//j.maxmind.com/js/apis/geoip2/v2.0/geoip2.js"></script>
+
+<script>
+geoip2.cityISPOrg(function (response) {
+    $("#country").html(response.country.names.en);
+    $("#region").html(response.most_specific_subdivision.names.en);
+    $("#city").html(response.city.names.en);
+    $("#isp").html(response.traits.isp);
+    $("#proxy").html(response.traits.is_anonymous_proxy);
+    $("#ip").html(response.traits.ip_address);
+}, null, { w3cGeolocationDisabled: true });
+</script>
+
+<p>
+    <span id="country"></span>,
+    <span id="region"></span>,
+    <span id="city"></span>,
+    <span id="isp"></span>,
+    <span id="ip"></span>,
+    is proxy? <span id="proxy"></span>
+</p>
