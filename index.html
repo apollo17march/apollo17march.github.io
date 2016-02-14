@@ -1,74 +1,22 @@
-<!DOCTYPE HTML>
- 
-<html>
-<head>
-  <script type="text/javascript" src="//js.maxmind.com/js/geoip.js">
-  </script>
- 
-  <title>JS Example</title>
-</head>
- 
-<body>
- 
-  <dl>
- 
-    <dt>City</dt>
-    <dd>
-      <script type="text/javascript">
-        document.write( geoip_city() );
-      </script>
-    </dd>
- 
-    <dt>Region</dt>
-    <dd>
-      <script type="text/javascript">
-        document.write( geoip_region() );
-      </script>
-    </dd>
- 
-    <dt>Region Name</dt>
-    <dd>
-      <script type="text/javascript">
-        document.write( geoip_region_name() );
-      </script>
-    </dd>
- 
-    <dt>Postal Code</dt>
-    <dd>
-      <script type="text/javascript">
-        document.write( geoip_postal_code() );
-      </script>
-    </dd>
- 
-    <dt>Country Code</dt>
-    <dd>
-      <script type="text/javascript">
-        document.write( geoip_country_code() );
-      </script>
-    </dd>
- 
-    <dt>Country Name</dt>
-    <dd>
-      <script type="text/javascript">
-        document.write( geoip_country_name() );
-      </script>
-    </dd>
- 
-    <dt>Latitude</dt>
-    <dd>
-      <script type="text/javascript">
-        document.write( geoip_latitude() );
-      </script>
-    </dd>
- 
-    <dt>Longitude</dt>
-    <dd>
-      <script type="text/javascript">
-        document.write( geoip_longitude() );
-      </script>
-    </dd>
- 
-  </dl>
- 
-</body>
-</html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="//j.maxmind.com/js/apis/geoip2/v2.0/geoip2.js"></script>
+
+<script>
+geoip2.cityISPOrg(function (response) {
+    $("#country").html(response.country.names.en);
+    $("#region").html(response.most_specific_subdivision.names.en);
+    $("#city").html(response.city.names.en);
+    $("#isp").html(response.traits.isp);
+    $("#proxy").html(response.traits.is_anonymous_proxy);
+    $("#ip").html(response.traits.ip_address);
+}, null, { w3cGeolocationDisabled: true });
+</script>
+
+<p>
+    <span id="country"></span>,
+    <span id="region"></span>,
+    <span id="city"></span>,
+    <span id="isp"></span>,
+    <span id="ip"></span>,
+    is proxy? <span id="proxy"></span>
+</p>
