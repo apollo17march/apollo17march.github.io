@@ -64,7 +64,7 @@ html, body {
     font-size: 12px;
     opacity: 0.8;
     color: #fff;
-    width: 500px;
+    width: 100%;
     left: 0px;
     top: 20px;
 }
@@ -134,7 +134,7 @@ html, body {
 }
 
 .info .about a {
-    
+
     opacity: 0.9;
 }
 
@@ -179,9 +179,8 @@ html, body {
 }
 
 .info .more a {
-    
+
     text-transform: uppercase;
     margin-right: 10px;
     font-size: 10px;
 }​
-
