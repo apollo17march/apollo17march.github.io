@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Start Shared Form 1st Script -->
+<script type="text/javascript">   
+var prmstr = window.location.search.substr(1); 
+var prmarr = prmstr.split ("&"); 
+var params = {};  
+for ( var i = 0; i < prmarr.length; i++) { var tmparr = prmarr[i].split("="); params[tmparr[0]] = tmparr[1]; }  
+var tacticidqs = "";   
+</script>
+<!-- End Shared Form 1st Script -->
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+<title>Sage 50 Accounting - Free Product Trial</title>
+<link rel="stylesheet" type="text/css" media="screen" href="http://images.go.na.sage.com/Web/SageCorporateInstance/{1cbbe84b-2d3e-4ff3-ab37-72f8c30fa196}_custom.css">
+<link rel="stylesheet" type="text/css" media="screen" href="http://images.go.na.sage.com/Web/SageCorporateInstance/{f5ccea3d-442c-405b-9cb3-d1dfac4b8371}_bootstrap.min.css">
+<script src="http://images.go.na.sage.com/Web/SageCorporateInstance/%7Bbd201ec4-5f39-49f6-bb66-90c41435fc57%7D_14-35519_jquery-1.10.2.min.js"></script>
+<script src="http://images.go.na.sage.com/Web/SageCorporateInstance/{3b4ce040-7cf4-422a-af66-6d3b1646268c}_bootstrap.min.js"></script>
+<script src="http://images.go.na.sage.com/Web/SageCorporateInstance/{fceb1710-77f2-4f6c-aacc-f0a7c679eb14}_respond.js"></script>
+<link rel="stylesheet" type="text/css" href="style3.css">
+
+<!-- Place Google Analytics Script here-->
+
+
+
+<!-- END Google Analytics Script here-->
+
+</head>
+<body>
+
+<!-- END  Form integration script here (from MAM)  --> 
+
+<!-- Start prepop script -- Sage 50 US v1 --> 
+
+<!-- SCRIPT SECTION 1:  Variables that need customizing based on your Instance of Eloqua--> 
+<script type="text/javascript">
+	var EloquaSiteID = "493551783";
+	var EloquaScript = "https://na.sage.com/elqNow/elqCfg.min.js";
+	var LookupIdVisitor = "7a54b2286c5c48e1b11a08baedbbad18";
+	var LookupIdPrimary = "494d0d2100e44bab94065885db9a9c16";
+	var VisitorUniqueField = "V_ElqEmailAddress";
+	var PrimaryUniqueField = "C_EmailAddress";
+	var EloquaFormID;
+	var myEmail = "";   //Value will populate if coming from email to elq LP
+
+	<!-- SCRIPT SECTION 2:  Standard Eloqua Asyncronous Tracking Code | The unique values have been placed in Variables (EloquaSiteID and EloquaScript) -->
+        var _elqQ = _elqQ || [];
+        _elqQ.push(['elqSetSiteId', EloquaSiteID]);
+        _elqQ.push(['elqTrackPageView']);
+
+        (function () {
+            function async_load() {
+                var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+                s.src = EloquaScript;
+                var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+            }
+            if (window.addEventListener) window.addEventListener('DOMContentLoaded', async_load, false);
+            else if (window.attachEvent) window.attachEvent('onload', async_load);
+        })();
+
+	<!-- SCRIPT SECTION 3:  Eloqua Field Functions -->
+		function LoadFields(FormID) {
+
+			var container, inputs, index;
+
+			// Get the Form element
+			container = document.getElementById(FormID);
+
+			inputs = container.getElementsByTagName('input');
+			for (index = 0; index < inputs.length; index++) {
+				var LookupID = inputs[index].name;
+				var LookupValue = GetElqContentPersonalizationValue(LookupID);
+				// This value is used for CHECK BOX value comparisons
+				var LowerCaseValue = LookupValue.toLowerCase();
+
+				// deal with inputs[index] element.  Compare to LookupID and LookupValue.
+
+				// Form Field Prepopulation
+				if (inputs[index].name == LookupID) {
+					if (inputs[index].type == "checkbox") {
+						// Place code here for CHECKBOX Inputs
+						if (LowerCaseValue == "on") inputs[index].checked=true;
+						else if (LowerCaseValue == "true") inputs[index].checked=true;
+						else if (LowerCaseValue == "y") inputs[index].checked=true;
+						else if (LowerCaseValue == "yes") inputs[index].checked=true;
+						else if (LowerCaseValue == "checked") inputs[index].checked=true;
+						else if (LowerCaseValue == "1") inputs[index].checked=true;
+					} else if (inputs[index].type == "text" && LookupValue != "") {
+						// Place code here for STANDARD TEXT Inputs
+						inputs[index].value = LookupValue;
+					} else {
+						// All Other Inputs = do nothing
+					}
+				}
+			}
+
+            var selects = container.getElementsByTagName('select');
+            for (index = 0; index < selects.length; index++) {
+                var LookupID = selects[index].name;
+                var LookupValue = GetElqContentPersonalizationValue(LookupID);
+                setDropDown(selects[index].id, LookupValue);
+
+            }
+		}
+
+        function setDropDown(dropBox, value) {
+
+         $("#"+dropBox+" option").each(function(i){
+         		if($(this).val() == value){
+         			$("#"+dropBox+"").prop('selectedIndex', i);
+         			return false;
+         		}
+		    });
+        }
+
+
+	<!-- SCRIPT SECTION 4:  Eloqua Web Data Lookups -->
+		// SetElqContent is triggered by the Data Lookup Scripts automatically. The "FirstLookup" modification allows for the Visitor Lookup to trigger the second Lookup (Contact/Datacard/Prospect/Company)
+		var FirstLookup = true;
+        function SetElqContent() {
+            if (FirstLookup) {
+				//LOOKUP B:  Eloqua Contact/DataCard/Prospect/Company Data Lookup from Email Address
+				_elqQ.push(['elqDataLookup', escape(LookupIdPrimary), '<' + PrimaryUniqueField +'>' + GetElqContentPersonalizationValue(VisitorUniqueField) + '</' + PrimaryUniqueField + '>']);
+				FirstLookup = false;
+			} else {
+				//This is triggered the after Lookup B fires.  LoadFields starts the field prepoulation process.
+				LoadFields(EloquaFormID);
+				
+      HideField('C_EmailAddress','input');
+      HideField('C_Country','select');
+
+			}
+        }
+
+		// LOOKUP A:  Eloqua Visitor Data Lookup from Cookie  -  Ensure VisitorUniqueField is pulled in the Profile View
+
+        if(myEmail == "")
+        	_elqQ.push(['elqDataLookup', escape(LookupIdVisitor), '']);
+        else
+        {
+        	FirstLookup = false;
+			_elqQ.push(['elqDataLookup', escape(LookupIdPrimary), '<' + PrimaryUniqueField +'>' + myEmail + '</' + PrimaryUniqueField + '>']);
+		}
+
+	<!-- SCRIPT SECTION 5:  Hidden field population -->
+
+
+var vars = [], hash;
+var q = document.URL.split('?')[1];
+if(q != undefined){
+	q = q.split('&');
+	for(var i = 0; i < q.length; i++){
+		hash = q[i].split('=');
+		vars.push(hash[1]);
+		vars[hash[0]] = hash[1];
+	}
+}
+
+ $(document).ready(function() {
+
+  	EloquaFormID = document.forms[0].id;
+ 	if(vars['cc'] != '' && vars['cc'] != undefined)
+ 		$('input[name=TacticID]').val(vars['cc']);
+
+ 	if(vars['ag'] != '' && vars['ag'] != undefined)
+ 		$('input[name=PPC_AG]').val(vars['ag']);
+ 	if(vars['campaign'] != '' && vars['campaign'] != undefined)
+ 		$('input[name=PPC_C]').val(vars['campaign']);
+ 	if(vars['kw'] != '' && vars['kw'] != undefined)
+ 		$('input[name=PPC_K]').val(vars['kw']);
+ 	if(vars['se'] != '' && vars['se'] != undefined)
+ 		$('input[name=PPC_SE]').val(vars['se']);
+ 	if(vars['curTerms'] != '' && vars['curTerms'] != undefined)
+ 		$('input[name=Organic_K]').val(vars['curTerms']);
+ 	if(vars['refSource'] != '' && vars['cc'] != undefined)
+ 		$('input[name=Organic_SE]').val(vars['refSource']);
+
+
+	var script   = document.createElement("script");
+	script.type  = "text/javascript";
+	script.text  = "$('#"+document.forms[0].id+"').submit(function() { $('input[name=ResponseID]').val($('input[name=C_EmailAddress]').val() + $('input[name=TacticID]').val()); });";
+      
+     
+      
+	$('body').append( script );
+
+});
+
+function HideField(myField,myType) {
+	if($(''+myType+'[name='+myField+']').val() != ''){
+		$(''+myType+'[name='+myField+']').parent().parent().parent().parent().hide();
+	}
+}
+</script> 
+<!-- End prepop script Sage 50 US v1--> 
+
+<!-- Start of DoubleClick Floodlight Tag: Please do not remove
+Activity name of this tag: S50US_Trial_2 URL of the webpage where the tag is expected to be placed: http://go.na.sage.com/S50US_Trial_2 Creation Date: 01/26/2016 --> 
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<iframe src="https://4292075.fls.doubleclick.net/activityi;src=4292075;type=sage5000;cat=s50us00g;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1;num=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+</script>
+<noscript>
+<iframe src="https://4292075.fls.doubleclick.net/activityi;src=4292075;type=sage5000;cat=s50us00g;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1;num=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+</noscript>
+<!-- End of DoubleClick Floodlight Tag: Please do not remove --> 
+
+<!--This is where the logo goes-->
+<div class="row" style="margin-top:42px;padding:0"> 
+  
+  <!--End logo area-->
+  <div class="col-md-12 col-md-offset-4" align="center">
+    <p style="font-size:20px; color:#51534a; "> Questions? 866 535-7243</p>
+  </div>
+  <!-- CONTAINER END --> 
+</div>
+
+<!-- CONTAINER START BULLETS AND FORM  -->
+<div>
+  <div class="row"> 
+    
+    <!-- Begin container with FORM -->
+    
+    <div id="headerTest" align="right" style="background-color:#;"> 
+      
+      <!-- ROW START --> 
+      <!--This is where the logo goes-->
+      <div class="col-md-12">
+        <div class="col-md-12 " align="center" style=" padding-top: 26px;"><img src="logo2.png" height="95" alt="Sage 50 logo"></div>
+      </div>
+      <!--End logo area-->
+      <div class="col-md-5 col-md-offset-1">
+        <h1 style="color:#ffffff; text-align:left; font-size:42px; padding-top: 24px;"><strong>Tell us a bit more about yourself.</strong></h1>
+        <h3 style="font-size:24px; line-height=150%; color:#ffffff;text-align:left;">The more we know, the more we can customize your test drive. We’ll send you on your way in about 30 seconds. </h3>
+      </div>
+      <div class="col-md-5 col-md-offset-1 " style="text-align:left; background-color:#;">
+        <h3 style="padding-bottom:0px; padding-top:24px; color:#ffffff; font-size:26px;  margin-left: 3%; text-align:center;">Request your free trial</h3>
+        
+        <!-- Insert Form start here -->
+        
+        <div>
+          <form id="form1018" action="success.html" name="S50US_TestDrive_2" method="post">
+            <input type="hidden" name="elqFormName" value="S50US_TestDrive_2">
+            <input type="hidden" name="elqSiteId" value="493551783">
+            <input type="hidden" name="elqCampaignId">
+            <div style="left: 0px; right: 0px; top: 0px; bottom: 0px; padding: 6px 5px 9px 9px" class="sc-view form-design-field sc-static-layout sc-regular-size" id="formElement0">
+              <div style="float: left; width: 100%; clear: both" class="field-wrapper">
+                <div style="float: left; width: 96%; margin-right: 2%; margin-left: 2%" class="_100">
+                  <p style="position: relative; margin: 0px; padding: 0px">
+                    <label style="display: block;  padding: 0px 0pt 0px; float: left; width: 50%; margin: 0pt; word-wrap: break-word; font-weight:100;  font-size:16px; color:#ffffff;" for="C_FirstName"><strong>First name</strong><span style="color: red !important; display: inline; float: none; font-weight: bold; margin: 0pt 0pt 0pt; padding: 0pt 0pt 0pt;">*</span></label>
+                    <br>
+                    <input type="text" style="width: 90%; " value="" name="C_FirstName" id="field0">
+                  </p>
+                  <br>
+                </div>
+              </div>
+            </div>
+            <div style="left: 0px; right: 0px; top: 0px; bottom: 0px; padding: 6px 5px 9px 9px" class="sc-view form-design-field sc-static-layout sc-regular-size" id="formElement1">
+              <div style="float: left; width: 100%; clear: both" class="field-wrapper">
+                <div style="float: left; width: 96%; margin-right: 2%; margin-left: 2%" class="_100">
+                  <p style="position: relative; margin: 0px; padding: 0px">
+                    <label style="display: block;  padding: 0px 0pt 0px; float: left; width: 31%; margin: 0pt; word-wrap: break-word; font-weight:100;  font-size:16px; color:#ffffff;" for="C_LastName"><strong>Last name</strong><span style="color: red !important; display: inline; float: none; font-weight: bold; margin: 0pt 0pt 0pt; padding: 0pt 0pt 0pt">*</span></label>
+                    <br>
+                    <input type="text" style="width: 90%" value="" name="C_LastName" id="field1">
+                  </p>
+                  <br>
+                </div>
+              </div>
+            </div>
+            <div style="left: 0px; right: 0px; top: 0px; bottom: 0px; padding: 6px 5px 9px 9px" class="sc-view form-design-field sc-static-layout sc-regular-size" id="formElement2">
+              <div style="float: left; width: 100%; clear: both" class="field-wrapper">
+                <div style="float: left; width: 96%; margin-right: 2%; margin-left: 2%" class="_100">
+                  <p style="position: relative; margin: 0px; padding: 0px">
+                    <label style="display: block;  padding: 0px 0pt 0px; float: left; width: 50%; margin: 0pt; word-wrap: break-word; font-weight:100;  font-size:16px; color:#ffffff;" for="C_Company"><strong>Company name</strong><span style="color: red !important; display: inline; float: none; font-weight: bold; margin: 0pt 0pt 0pt; padding: 0pt 0pt 0pt">*</span></label>
+                    <br>
+                    <input type="text" style="width: 90%" value="" name="C_Company" id="field2">
+                  </p>
+                  <br>
+                </div>
+              </div>
+            </div>
+            <div style="left: 0px; right: 0px; top: 0px; bottom: 0px; padding: 6px 5px 9px 9px" class="sc-view form-design-field sc-static-layout sc-regular-size" id="formElement3">
+              <div style="float: left; width: 100%; clear: both" class="field-wrapper">
+                <div style="float: left; width: 96%; margin-right: 2%; margin-left: 2%" class="_100">
+                  <p style="position: relative; margin: 0px; padding: 0px">
+                    <label style="display: block;  padding: 0px 0pt 0px; float: left; width: 50%; margin: 0pt; word-wrap: break-word; font-weight:100;  font-size:16px; color:#ffffff;" for="C_State_Prov"><strong>State/Province</strong><span style="color: red !important; display: inline; float: none; font-weight: bold; margin: 0pt 0pt 0pt; padding: 0pt 0pt 0pt">*</span></label>
+                    <br>
+                    <select style="width: 60%; height:30px; font-size:16px;" name="C_State_Prov" id="field3">
+                      <option value="">Please Select…</option>
+                      <option value="NA">N/A - if country other than US, PR or CA</option>
+                      <option value="AK">Alaska</option>
+                      <option value="AL">Alabama</option>
+                      <option value="AR">Arkansas</option>
+                      <option value="AS">American Samoa</option>
+                      <option value="AZ">Arizona</option>
+                      <option value="CA">California</option>
+                      <option value="CO">Colorado</option>
+                      <option value="CT">Connecticut</option>
+                      <option value="DC">D.C.</option>
+                      <option value="DE">Delaware</option>
+                      <option value="FL">Florida</option>
+                      <option value="FM">Micronesia</option>
+                      <option value="GA">Georgia</option>
+                      <option value="GU">Guam</option>
+                      <option value="HI">Hawaii</option>
+                      <option value="IA">Iowa</option>
+                      <option value="ID">Idaho</option>
+                      <option value="IL">Illinois</option>
+                      <option value="IN">Indiana</option>
+                      <option value="KS">Kansas</option>
+                      <option value="KY">Kentucky</option>
+                      <option value="LA">Louisiana</option>
+                      <option value="MA">Massachusetts</option>
+                      <option value="MD">Maryland</option>
+                      <option value="ME">Maine</option>
+                      <option value="MH">Marshall Islands</option>
+                      <option value="MI">Michigan</option>
+                      <option value="MN">Minnesota</option>
+                      <option value="MO">Missouri</option>
+                      <option value="MP">Marianas</option>
+                      <option value="MS">Mississippi</option>
+                      <option value="MT">Montana</option>
+                      <option value="NC">North Carolina</option>
+                      <option value="ND">North Dakota</option>
+                      <option value="NE">Nebraska</option>
+                      <option value="NH">New Hampshire</option>
+                      <option value="NJ">New Jersey</option>
+                      <option value="NM">New Mexico</option>
+                      <option value="NV">Nevada</option>
+                      <option value="NY">New York</option>
+                      <option value="OH">Ohio</option>
+                      <option value="OK">Oklahoma</option>
+                      <option value="OR">Oregon</option>
+                      <option value="PA">Pennsylvania</option>
+                      <option value="PR">Puerto Rico</option>
+                      <option value="PW">Palau</option>
+                      <option value="RI">Rhode Island</option>
+                      <option value="SC">South Carolina</option>
+                      <option value="SD">South Dakota</option>
+                      <option value="TN">Tennessee</option>
+                      <option value="TX">Texas</option>
+                      <option value="UT">Utah</option>
+                      <option value="VA">Virginia</option>
+                      <option value="VI">Virgin Islands</option>
+                      <option value="VT">Vermont</option>
+                      <option value="WA">Washington</option>
+                      <option value="WI">Wisconsin</option>
+                      <option value="WV">West Virginia</option>
+                      <option value="WY">Wyoming</option>
+                      <option value="AA">Military Americas</option>
+                      <option value="AE">Military Europe/ME/Canada</option>
+                      <option value="AP">Military Pacific</option>
+                      <option value="AB">Alberta</option>
+                      <option value="MB">Manitoba</option>
+                      <option value="BC">British Columbia</option>
+                      <option value="NB">New Brunswick</option>
+                      <option value="NL">Newfoundland and Labrador</option>
+                      <option value="NS">Nova Scotia</option>
+                      <option value="NT">Northwest Territories</option>
+                      <option value="NU">Nunavut</option>
+                      <option value="ON">Ontario</option>
+                      <option value="PE">Prince Edward Island</option>
+                      <option value="QC">Quebec</option>
+                      <option value="SK">Saskatchewan</option>
+                      <option value="YT">Yukon Territory</option>
+                    </select>
+                  </p>
+                  <br>
+                </div>
+              </div>
+            </div>
+            <div style="left: 0px; right: 0px; top: 0px; bottom: 0px; padding: 6px 5px 9px 9px" class="sc-view form-design-field sc-static-layout sc-regular-size" id="formElement4">
+              <div style="float: left; width: 100%; clear: both" class="field-wrapper">
+                <div style="float: left; width: 96%; margin-right: 2%; margin-left: 2%" class="_100">
+                  <p style="position: relative; margin: 0px; padding: 0px">
+                    <label style="display: block;  padding: 0px 0pt 0px; float: left; width: 50%; margin: 0pt; word-wrap: break-word; font-weight:100;  font-size:16px; color:#ffffff;" for="C_BusPhone"><strong>Business phone</strong><span style="color: red !important; display: inline; float: none; font-weight: bold; margin: 0pt 0pt 0pt; padding: 0pt 0pt 0pt">*</span></label>
+                    <br>
+                    <input type="text" style="width: 60%" value="" name="C_BusPhone" id="field4">
+                  </p>
+                  <br>
+                </div>
+              </div>
+            </div>
+            <div style="left: 0px; right: 0px; top: 0px; bottom: 0px; padding: 6px 5px 9px 9px" class="sc-view form-design-field sc-static-layout sc-regular-size" id="formElement5">
+              <div style="float: left; width: 100%; clear: both" class="field-wrapper">
+                <div style="float: left; width: 96%; margin-right: 2%; margin-left: 2%" class="_100">
+                  <p style="position: relative; margin: 0px; padding: 0px">
+                    <label style="display: block;  padding: 0px 0pt 0px; float: left; width: 100%; margin: 0pt; word-wrap: break-word; font-weight:100;  font-size:16px; color:#ffffff;" for="C_Current_Solution_1"><strong>How are you currently handling your accounting?</strong><span style="color: red !important; display: inline; float: none; font-weight: bold; margin: 0pt 0pt 0pt; padding: 0pt 0pt 0pt">*</span></label>
+                    <br>
+                    <select style="width: 60%; height:30px; font-size:16px;" name="C_Current_Solution_1" id="field5">
+                      <option value="">Please Select...</option>
+                      <option value="Student Evaluation">Student Evaluation</option>
+                      <option value="Manual/Excel">Manual/Excel</option>
+                      <option value="QuickBooks">QuickBooks</option>
+                      <option value="ERP Solution">ERP Solution</option>
+                      <option value="Another Sage Product">Another Sage Product</option>
+                      <option value="None/New Business">None/New Business</option>
+                      <option value="Other   ">Other</option>
+                    </select>
+                  </p>
+                  <br>
+                </div>
+              </div>
+            </div>
+            <div style="left: 0px; right: 0px; top: 0px; bottom: 0px; padding: 6px 5px 9px 9px" class="sc-view form-design-field sc-static-layout sc-regular-size" id="formElement6">
+              <div style="float: left; width: 100%; clear: both" class="field-wrapper">
+                <div style="float: left; width: 96%; margin-right: 2%; margin-left: 2%" class="_100">
+                  <p style="position: relative; margin: 0px; padding: 0px">
+                    <label style="display: block;  padding: 0px 0pt 0px; float: left; width: 100%; margin: 0pt; word-wrap: break-word; font-weight:100;  font-size:16px; color:#ffffff;" for="C_EmailAddress"><strong>Email address</strong><span style="color: red !important; display: inline; float: none; font-weight: bold; margin: 0pt 0pt 0pt; padding: 0pt 0pt 0pt">*</span></label>
+                    <br>
+                    <input id="field6" style="width: 60%; height:30px; font-size:16px;" type="text" name="C_EmailAddress" value=''>
+                  </p>
+                  <br>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 6px 5px 9px 9px" class="sc-view form-design-field sc-static-layout sc-regular-size" id="formElement12">
+              <div style="float: left; width: 100%; clear: both" class="field-wrapper">
+                <div style="float: left; width: 96%; margin-right: 2%; margin-left: 2%" class="_100">
+                  <p style="position: relative; padding-bottom: 10px;">
+                    <label style="display: block;  padding: 0px 0pt 0px; float: left; width: 31%; margin: 0pt; word-wrap: break-word; font-weight:100;  font-size:16px; color:#ffffff;" for="C_Country"><strong>Country</strong><span style="color: red !important; display: inline; float: none; font-weight: bold; margin: 0pt 0pt 0pt; padding: 0pt 0pt 0pt">*</span></label>
+                    <br>
+                    <select id="field12" name="C_Country" style="width: 60%; height:30px; font-size:16px;">
+                      <option value="" selected="selected">Please select...</option>
+                      <option value="US">United States</option>
+                      <option value="CA">Canada</option>
+                      <option value="AF">Afghanistan</option>
+                      <option value="AX">Åland Islands</option>
+                      <option value="AL">Albania</option>
+                      <option value="DZ">Algeria</option>
+                      <option value="AS">American Samoa</option>
+                      <option value="AD">Andorra</option>
+                      <option value="AO">Angola</option>
+                      <option value="AI">Anguilla</option>
+                      <option value="AQ">Antarctica</option>
+                      <option value="AG">Antigua and Barbuda</option>
+                      <option value="AR">Argentina</option>
+                      <option value="AM">Armenia</option>
+                      <option value="AW">Aruba</option>
+                      <option value="AU">Australia</option>
+                      <option value="AT">Austria</option>
+                      <option value="AZ">Azerbaijan</option>
+                      <option value="BS">Bahamas</option>
+                      <option value="BH">Bahrain</option>
+                      <option value="BD">Bangladesh</option>
+                      <option value="BB">Barbados</option>
+                      <option value="BY">Belarus</option>
+                      <option value="BE">Belgium</option>
+                      <option value="BZ">Belize</option>
+                      <option value="BJ">Benin</option>
+                      <option value="BM">Bermuda</option>
+                      <option value="BT">Bhutan</option>
+                      <option value="BO">Bolivia</option>
+                      <option value="BA">Bosnia and Herzegovina</option>
+                      <option value="BW">Botswana</option>
+                      <option value="BV">Bouvet Island</option>
+                      <option value="BR">Brazil</option>
+                      <option value="IO">Brit/Indian Ocean Terr.</option>
+                      <option value="BN">Brunei Darussalam</option>
+                      <option value="BG">Bulgaria</option>
+                      <option value="BF">Burkina Faso</option>
+                      <option value="BI">Burundi</option>
+                      <option value="KH">Cambodia</option>
+                      <option value="CM">Cameroon</option>
+                      <option value="CV">Cape Verde</option>
+                      <option value="KY">Cayman Islands</option>
+                      <option value="CF">Central African Republic</option>
+                      <option value="TD">Chad</option>
+                      <option value="CL">Chile</option>
+                      <option value="CN">China</option>
+                      <option value="CX">Christmas Island</option>
+                      <option value="CC">Cocos (Keeling) Islands</option>
+                      <option value="CO">Colombia</option>
+                      <option value="KM">Comoros</option>
+                      <option value="CG">Congo</option>
+                      <option value="CD">Congo, The Dem. Republic Of</option>
+                      <option value="CK">Cook Islands</option>
+                      <option value="CR">Costa Rica</option>
+                      <option value="CI">Côte D'Ivore</option>
+                      <option value="HR">Croatia</option>
+                      <option value="CU">Cuba</option>
+                      <option value="CY">Cyprus</option>
+                      <option value="CZ">Czech Republic</option>
+                      <option value="DK">Denmark</option>
+                      <option value="DJ">Djibouti</option>
+                      <option value="DM">Dominica</option>
+                      <option value="DO">Dominican Republic</option>
+                      <option value="EC">Ecuador</option>
+                      <option value="EG">Egypt</option>
+                      <option value="SV">El Salvador</option>
+                      <option value="GQ">Equatorial Guinea</option>
+                      <option value="ER">Eritrea</option>
+                      <option value="EE">Estonia</option>
+                      <option value="ET">Ethiopia</option>
+                      <option value="FK">Falkland Islands</option>
+                      <option value="FO">Faroe Islands</option>
+                      <option value="FJ">Fiji</option>
+                      <option value="FI">Finland</option>
+                      <option value="FR">France</option>
+                      <option value="GF">French Guiana</option>
+                      <option value="PF">French Polynesia</option>
+                      <option value="TF">French Southern Terr.</option>
+                      <option value="GA">Gabon</option>
+                      <option value="GM">Gambia</option>
+                      <option value="GE">Georgia</option>
+                      <option value="DE">Germany</option>
+                      <option value="GH">Ghana</option>
+                      <option value="GI">Gibraltar</option>
+                      <option value="GB">United Kingdom</option>
+                      <option value="GR">Greece</option>
+                      <option value="GL">Greenland</option>
+                      <option value="GD">Grenada</option>
+                      <option value="GP">Guadeloupe</option>
+                      <option value="GU">Guam</option>
+                      <option value="GT">Guatemala</option>
+                      <option value="GN">Guinea</option>
+                      <option value="GW">Guinea-Bissau</option>
+                      <option value="GY">Guyana</option>
+                      <option value="HT">Haiti</option>
+                      <option value="HM">Heard/McDonald Isls.</option>
+                      <option value="HN">Honduras</option>
+                      <option value="HK">Hong Kong</option>
+                      <option value="HU">Hungary</option>
+                      <option value="IS">Iceland</option>
+                      <option value="IN">India</option>
+                      <option value="ID">Indonesia</option>
+                      <option value="IR">Iran</option>
+                      <option value="IQ">Iraq</option>
+                      <option value="IE">Ireland</option>
+                      <option value="IL">Israel</option>
+                      <option value="IT">Italy</option>
+                      <option value="JM">Jamaica</option>
+                      <option value="JP">Japan</option>
+                      <option value="JO">Jordan</option>
+                      <option value="KZ">Kazakhstan</option>
+                      <option value="KE">Kenya</option>
+                      <option value="KI">Kiribati</option>
+                      <option value="KP">Korea (North)</option>
+                      <option value="KR">Korea (South)</option>
+                      <option value="KW">Kuwait</option>
+                      <option value="KG">Kyrgyzstan</option>
+                      <option value="LA">Laos</option>
+                      <option value="LV">Latvia</option>
+                      <option value="LB">Lebanon</option>
+                      <option value="LS">Lesotho</option>
+                      <option value="LR">Liberia</option>
+                      <option value="LY">Libya</option>
+                      <option value="LI">Liechtenstein</option>
+                      <option value="LT">Lithuania</option>
+                      <option value="LU">Luxembourg</option>
+                      <option value="MO">Macau</option>
+                      <option value="MK">Macedonia</option>
+                      <option value="MG">Madagascar</option>
+                      <option value="MW">Malawi</option>
+                      <option value="MY">Malaysia</option>
+                      <option value="MV">Maldives</option>
+                      <option value="ML">Mali</option>
+                      <option value="MT">Malta</option>
+                      <option value="MH">Marshall Islands</option>
+                      <option value="MQ">Martinique</option>
+                      <option value="MR">Mauritania</option>
+                      <option value="MU">Mauritius</option>
+                      <option value="YT">Mayotte</option>
+                      <option value="MX">Mexico</option>
+                      <option value="FM">Micronesia</option>
+                      <option value="MD">Moldova</option>
+                      <option value="MC">Monaco</option>
+                      <option value="MN">Mongolia</option>
+                      <option value="MS">Montserrat</option>
+                      <option value="MA">Morocco</option>
+                      <option value="MZ">Mozambique</option>
+                      <option value="MM">Myanmar</option>
+                      <option value="MP">N. Mariana Isls.</option>
+                      <option value="NA">Namibia</option>
+                      <option value="NR">Nauru</option>
+                      <option value="NP">Nepal</option>
+                      <option value="NL">Netherlands</option>
+                      <option value="AN">Netherlands Antilles</option>
+                      <option value="NC">New Caledonia</option>
+                      <option value="NZ">New Zealand</option>
+                      <option value="NI">Nicaragua</option>
+                      <option value="NE">Niger</option>
+                      <option value="NG">Nigeria</option>
+                      <option value="NU">Niue</option>
+                      <option value="NF">Norfolk Island</option>
+                      <option value="NO">Norway</option>
+                      <option value="OM">Oman</option>
+                      <option value="PK">Pakistan</option>
+                      <option value="PW">Palau</option>
+                      <option value="PS">Palestinian Territory, Occupied</option>
+                      <option value="PA">Panama</option>
+                      <option value="PG">Papua New Guinea</option>
+                      <option value="PY">Paraguay</option>
+                      <option value="PE">Peru</option>
+                      <option value="PH">Philippines</option>
+                      <option value="PN">Pitcairn</option>
+                      <option value="PL">Poland</option>
+                      <option value="PT">Portugal</option>
+                      <option value="PR">Puerto Rico</option>
+                      <option value="QA">Qatar</option>
+                      <option value="RE">Reunion</option>
+                      <option value="RO">Romania</option>
+                      <option value="RU">Russian Federation</option>
+                      <option value="RW">Rwanda</option>
+                      <option value="KN">Saint Kitts and Nevis</option>
+                      <option value="LC">Saint Lucia</option>
+                      <option value="WS">Samoa</option>
+                      <option value="SM">San Marino</option>
+                      <option value="ST">Sao Tome/Principe</option>
+                      <option value="SA">Saudi Arabia</option>
+                      <option value="SN">Senegal</option>
+                      <option value="CS">Serbia and Montenegro</option>
+                      <option value="SC">Seychelles</option>
+                      <option value="SL">Sierra Leone</option>
+                      <option value="SG">Singapore</option>
+                      <option value="SK">Slovak Republic</option>
+                      <option value="SI">Slovenia</option>
+                      <option value="SB">Solomon Islands</option>
+                      <option value="SO">Somalia</option>
+                      <option value="ZA">South Africa</option>
+                      <option value="ES">Spain</option>
+                      <option value="LK">Sri Lanka</option>
+                      <option value="SH">St. Helena</option>
+                      <option value="PM">St. Pierre and Miquelon</option>
+                      <option value="VC">St. Vincent and Grenadines</option>
+                      <option value="SD">Sudan</option>
+                      <option value="SR">Suriname</option>
+                      <option value="SJ">Svalbard/Jan Mayen Isls.</option>
+                      <option value="SZ">Swaziland</option>
+                      <option value="SE">Sweden</option>
+                      <option value="CH">Switzerland</option>
+                      <option value="SY">Syria</option>
+                      <option value="TW">Taiwan</option>
+                      <option value="TJ">Tajikistan</option>
+                      <option value="TZ">Tanzania</option>
+                      <option value="TH">Thailand</option>
+                      <option value="TL">Timor-Leste</option>
+                      <option value="TG">Togo</option>
+                      <option value="TK">Tokelau</option>
+                      <option value="TO">Tonga</option>
+                      <option value="TT">Trinidad and Tobago</option>
+                      <option value="TN">Tunisia</option>
+                      <option value="TR">Turkey</option>
+                      <option value="TM">Turkmenistan</option>
+                      <option value="TC">Turks/Caicos Isls.</option>
+                      <option value="TV">Tuvalu</option>
+                      <option value="UG">Uganda</option>
+                      <option value="UA">Ukraine</option>
+                      <option value="AE">United Arab Emirates</option>
+                      <option value="UM">US Minor Outlying Is.</option>
+                      <option value="UY">Uruguay</option>
+                      <option value="UZ">Uzbekistan</option>
+                      <option value="VU">Vanuatu</option>
+                      <option value="VA">Vatican City</option>
+                      <option value="VE">Venezuela</option>
+                      <option value="VN">Viet Nam</option>
+                      <option value="VG">Virgin Islands (British)</option>
+                      <option value="VI">Virgin Islands (U.S.)</option>
+                      <option value="WF">Wallis/Futuna Isls.</option>
+                      <option value="EH">Western Sahara</option>
+                      <option value="YE">Yemen</option>
+                      <option value="ZM">Zambia</option>
+                      <option value="ZW">Zimbabwe</option>
+                    </select>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <input type="hidden" value="" name="TacticID" id="field7">
+            <input type="hidden" value="" name="hiddenField" id="field8">
+            <input type="hidden" value="" name="WTacticDescription" id="field9">
+            <input type="hidden" value="" name="ResponseID" id="field10">
+            
+            <!-- Place the required field div before the button div -->
+            <div style="margin-left:20px; ">
+              <p style="font-size:12px;color:#ffffff;"><span class="required" style="color: red !important; display: inline; float: none; font-weight: bold; margin: 0pt 0pt 0pt; padding: 0pt 0pt 0pt">*</span>Required field.</p>
+            </div>
+            <div style="left: 0px; right:0px; top: 0px; bottom:0px;" class="sc-view form-design-field sc-static-layout sc-regular-size" id="formElement12">
+              <div style="float: left; width: 100%; clear: both" class="field-wrapper">
+                <div style="float: left; width: 96%; margin-right: 2%; margin-left: 2%" class="_100">
+                  <p style="position: relative; margin: 0px; padding: 0px; text-align:center;">
+                    <input type="submit" value="Submit&nbsp;" class="btn btnPrimary" style="font-size: 100%; height: 40px; width: 130px; text-align:center;">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </form>
+          <script src="https://img03.en25.com/i/livevalidation_standalone.compressed.js" type="text/javascript"></script>
+          <style type="text/css" media="screen">
+.LV_validation_message{ font-weight:bold; margin: 0 0 0 5px; }
+.LV_valid{ color:#00CC00; display:none; }
+.LV_invalid{ color:#CC0000; font-size:10px; }
+.LV_valid_field, input.LV_valid_field:hover, input.LV_valid_field:active, textarea.LV_valid_field:hover, textarea.LV_valid_field:active { border: 1px solid #00CC00; }
+.LV_invalid_field, input.LV_invalid_field:hover, input.LV_invalid_field:active, textarea.LV_invalid_field:hover, textarea.LV_invalid_field:active { border: 1px solid #CC0000; }
+</style>
+          <script type="text/javascript">var field0 = new LiveValidation("field0", {validMessage: "", onlyOnBlur: true});field0.add(Validate.Presence, {failureMessage:"This field is required"});var field1 = new LiveValidation("field1", {validMessage: "", onlyOnBlur: true});field1.add(Validate.Presence, {failureMessage:"This field is required"});var field2 = new LiveValidation("field2", {validMessage: "", onlyOnBlur: true});field2.add(Validate.Presence, {failureMessage:"This field is required"});var field3 = new LiveValidation("field3", {validMessage: "", onlyOnBlur: true});field3.add(Validate.Presence, {failureMessage:"This field is required"});var field4 = new LiveValidation("field4", {validMessage: "", onlyOnBlur: true});field4.add(Validate.Presence, {failureMessage:"This field is required"});var field5 = new LiveValidation("field5", {validMessage: "", onlyOnBlur: true});field5.add(Validate.Presence, {failureMessage:"This field is required"});var field12 = new LiveValidation("field12", {validMessage: "", onlyOnBlur: true});</script></div>
+        
+        <!-- FORM ONLY CONTAINER END --> 
+        
+        <!-- START Shared Form 2nd Script  --> 
+        <script type="text/javascript"> 
+if (params.r) {tacticidqs = params.r;               
+target=document.getElementById('field7'); // Variable field based upon input ID in form
+target.value = tacticidqs}     
+</script> 
+        <!-- END Shared Form 2nd Script  --> 
+        
+      </div>
+      <!-- END ROW --> 
+    </div>
+  </div>
+  
+  <!-- END CONTAINER START BULLETS AND FORM --> 
+  
+  <!-- DISCLAIMERS GO HERE -->
+ <div class="container" style="margin-top: 50px ; margin-bottom:40px;">
+  <p class="footerInfo" style="text-align:center;">Quickbooks will not share your information with outside companies. Please review our <a href="https://global.intuit.com/about/full-privacy-statement.jsp">privacy policy</a>.</p>
+</div>
+<!-- START FOOTER Section DO NOT MAKE CHANGES TO THIS SECTION -->
+<div class="container" style="margin-top: 20px ; margin-bottom:30px;">
+  <div class="row">
+    <div class="col-md-12" align="center" style="padding-bottom:10px;"><img src="qb_logo.png" alt="sage"></div>
+    <br>
+    <br>
+    <div class="col-sm-12" style="padding-top:15px;">
+      <div align="center"> <a href="https://www.facebook.com/#"><img src="fb.png" alt="facebook" border="0"></a> &nbsp; <a href="https://twitter.com/#"><img src="twitter.png" alt="Twitter" border="0"></a> &nbsp; <a href="https://www.linkedin.com/#"><img src="li.png" alt="linkedin" border="0"></a> &nbsp; <a href="https://www.youtube.com/#"><img src="youtube.png" alt="Youtube" border="0"></a> <br>
+        <br>
+      </div>
+    </div>
+    <div class="col-sm-12" align="center"> <br>
+      <p class="footerInfo" style="margin-bottom:10px;">© 2016 Quickbooks plc or its licensors. All rights reserved. <br>
+        Quickbooks, Quickbooks logos, and Quickbooks product and service names mentioned herein are the trademarks of The Quickbooks Group plc or its licensors. <br>
+        All other trademarks are the property of their respective owners.</p>
+    </div>
+  </div>
+  <!-- end footer now -->
+    
+    <script src="http://images.go.na.sage.com/Web/SageCorporateInstance/{bd201ec4-5f39-49f6-bb66-90c41435fc57}_14-35519_jquery-1.10.2.min.js"></script> 
+    <script src="http://images.go.na.sage.com/Web/SageCorporateInstance/{3b4ce040-7cf4-422a-af66-6d3b1646268c}_bootstrap.min.js"></script> 
+  </div>
+</div>
+<!--[if lt IE 7]>
+<script src='http://images.go.na.sage.com/i/IE7.js'></script><script type='text/javascript'>var elements = document.all;var len = elements.length;for(var i = 0; i<len; i+=1){IE7.Layout.fixRight(elements[i]);IE7.Layout.fixBottom(elements[i]);}</script>
+<![endif]-->
+</body>
+</html>
+
+<script type="text/javascript">
+<!--
+if (navigator.appName == 'Netscape' || navigator.appName == 'Opera'){
+     document.write('<layer hidden=true><img src="http://s493551783.t.eloqua.com/visitor/v200/svrGP?pps=60&siteid=493551783&PURLSiteID=3&optin=disabled&PURLSiteAlternateDNSID=0&LandingPageID=2328&PURLRecordID=0&PURLGUID=c12c1d14022b4dc495179ebb44fb11e7&UseRelativePath=True&elq={00000000-0000-0000-0000-000000000000}&elq_ck=0" border=0 width=1 height=1 alt="" ><\/layer>');
+}else{
+     document.write('<img style="display:none" src="http://s493551783.t.eloqua.com/visitor/v200/svrGP?pps=60&siteid=493551783&PURLSiteID=3&optin=disabled&PURLSiteAlternateDNSID=0&LandingPageID=2328&PURLRecordID=0&PURLGUID=c12c1d14022b4dc495179ebb44fb11e7&UseRelativePath=True&elq={00000000-0000-0000-0000-000000000000}&elq_ck=0" border=0 width=1 height=1 alt="">');
+}
+
+-->
+</script>

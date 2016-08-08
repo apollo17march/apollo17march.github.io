@@ -1,0 +1,169 @@
+#policy {
+	background-color: #e0e1dd;
+	font-size: 14px;
+	margin: 50px 0;
+	padding: 20px;
+	text-align: center;
+}
+}
+@font-face {
+	font-family: 'adellelight';
+	src: url("http://www.sage.com/na/~/media/responsive/fonts/eot/AdelleSansSAGE-Light.eot");
+	src: url("http://www.sage.com/na/~/media/responsive/fonts/eot/AdelleSansSAGE-Light.eot?#iefix") format('embedded-opentype'), url("http://www.sage.com/na/~/media/responsive/fonts/woff/AdelleSansSAGE-Light.woff") format('woff'), url("http://www.sage.com/na/~/media/responsive/fonts/svg/AdelleSansSAGE-Light.svg#adellelight") format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'adelleregular';
+	src: url("http://www.sage.com/na/~/media/responsive/fonts/eot/AdelleSansSAGE.eot");
+	src: url("http://www.sage.com/na/~/media/responsive/fonts/eot/AdelleSansSAGE.eot?#iefix") format('embedded-opentype'), url("http://www.sage.com/na/~/media/responsive/fonts/woff/AdelleSansSAGE.woff") format('woff'), url("http://www.sage.com/na/~/media/responsive/fonts/svg/AdelleSansSAGE.svg#adelleregular") format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'adellebold';
+	src: url('http://www.sage.com/na/~/media/responsive/fonts/eot/AdelleSansSAGE-Bold.eot');
+	src: url('http://www.sage.com/na/~/media/responsive/fonts/eot/AdelleSansSAGE-Bold.eot?#iefix') format('embedded-opentype'), url('http://www.sage.com/na/~/media/responsive/fonts/woff/AdelleSansSAGE-Bold.woff') format('woff'), url('http://www.sage.com/na/~/media/responsive/fonts/svg/AdelleSansSAGE-Bold.svg#adellebold') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+body {
+	color: #000;
+	font-size: 14px;
+	font-family: 'adelleregular', sans-serif;
+}
+a {
+	color: #4178be;
+	text-decoration: none;
+	font-weight: normal;
+}
+a:hover {
+	color: #4178be;
+	text-decoration: underline;
+}
+/* MAIN STYLES */
+		
+div {
+	font-family: "adelleregular", sans-serif;
+}
+p {
+	font-family: "adelleregular", sans-serif;
+	font-size: 18px;
+	line-height: 1.2;
+	color: #51534A;
+}
+h1 {
+	font-family: "adelleregular", sans-serif;
+}
+h2 {
+	font-family: "adelleregular", sans-serif;
+	color: #51534A;
+	line-height: 1.2;
+	font-size: 36px;
+	font-weight: normal;
+}
+h3 {
+	font-family: "adelleregular", sans-serif;
+	line-height: 1.2;
+	font-size: 36px;
+	font-weight: normal;
+	margin-bottom: 15px;
+	color: #2a3456;
+}
+h4 {
+	color: #51534A;
+	margin-bottom: 5px;
+}
+/* HEADER HERO - this is where you control the look of the copy in the header  */
+
+		
+.headerBox {
+background-color:;
+	padding: 0px;
+	color: #51534A;
+	font-size: 14px;
+	margin: 20px 0;
+	float: center;
+	font-family: "adellelight", sans-serif;
+}
+.headerBox h1 {
+	font-size: 50px;
+	line-height: 1.2;
+	color: #2a3456;
+	margin: 0 10px 15px 10px;
+	padding: 0;
+}
+.headerBox h2 {
+	color: #51534a;
+	line-height: 1.2;
+	margin: 0 10px 15px 10px;
+	padding: 0;
+}
+.headerBox p {
+	margin: 0 10px 15px 10px;
+	padding: 0;
+	font-size: 18px;
+	color: #fff;
+}
+/* BUTTON STYLES this is for the magenta button  */		
+
+.btn {
+	border: 0;
+	border-radius: 0px;
+	font-size: 16px !important;
+	padding: 10px 12px;
+	text-align: center;
+	white-space: nowrap;
+	color: #ffffff;
+	text-decoration: none;
+	margin: 30px;
+}
+a.btnPrimary, a.btnPrimary:link, a.btnPrimary:active, a.btnPrimary:visited {
+	background-color: #CA2a60;
+	color: #fff;
+	
+	background-repeat: no-repeat;
+	background-position: right;
+}
+a.btnPrimary:hover {
+	background-color: #A90163;
+	color: #ffffff;
+}
+.block .btn {
+	margin-bottom: 0;
+}
+.noMargin {
+	margin: 0 0 0 0;
+}
+#form {
+	margin: 20px 0px 20px 0px;
+	padding: 20px 0;
+	text-align: center;
+	background-color: #EEEEED;
+}
+.btnPrimary {
+	background-color: #CA2a60;
+	color: #fff;
+	background-image: url(http://images.go.na.sage.com/EloquaImages/clients/SageCorporateInstance/%7be65690a5-3324-46ba-953f-2f998fe73308%7d_00000_arrow2.png);
+	background-repeat: no-repeat;
+	background-position: right;
+}
+.btnPrimary:hover {
+	background-color: #A90163;
+	color: #ffffff;
+}
+/* FOOTER STYLES */
+
+.footerInfo {
+	color: #51534A;
+	font-size: 12px;
+}
+p.footerInfo {
+	margin: 0;
+	padding: 0;
+	line-height: 1.1;
+	font-size: 12px;
+}
+ol.footerInfo {
+	margin-left: 13px;
+}
